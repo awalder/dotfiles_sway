@@ -1,0 +1,7 @@
+git clone https://aur.archlinux.org/direnv.git
+git clone https://aur.archlinux.org/corrupter-git.git
+git clone https://aur.archlinux.org/gamescope.git
+git clone https://aur.archlinux.org/mangohud.git
+git clone https://aur.archlinux.org/vkbasalt.git
+git clone https://aur.archlinux.org/bpytop.git
+git clone https://aur.archlinux.org/zsh-fast-syntax-highlighting.git

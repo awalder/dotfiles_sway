@@ -1,0 +1,12 @@
+[Unit]
+Description=NAS filesystem mount(ananas)
+After=NetworkManager-wait-online.service
+
+[Mount]
+What=//192.168.1.2/ananas
+Where=/home/awalder/mnt/ananas
+Type=cifs
+Options=user=turska,password=ruttuinenRessukka7778,uid=1000,gid=985,rw
+
+[Install]
+WantedBy=multi-user.target

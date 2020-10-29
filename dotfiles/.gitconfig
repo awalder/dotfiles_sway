@@ -1,0 +1,23 @@
+[user]
+	name = Anssi Walder
+	email = anssi.walder@kone.com
+
+[alias]
+    lg = log --graph --date=relative --pretty=format:\"%C(auto,yellow)%h %C(auto,blue)%ad %C(auto,green)%aN %C(auto,reset)%s%C(auto)%d\"
+    rotten = for-each-ref --sort=committerdate refs/heads/ --format='%(authordate) %(refname:short)'
+    rrotten = for-each-ref --sort=committerdate refs/remotes/origin/ --format='%(committerdate) | %(committername) | %(refname:short)'
+	co = checkout
+    cp = cherry-pick
+	br = branch
+    s = status
+    st = status -sb
+[core]
+	editor = nvim
+[rerere]
+	enabled = false
+[rebase]
+    autostash = true
+[commit]
+    verbose = true
+[log]
+    decorate = full

@@ -1,0 +1,12 @@
+[Unit]
+Description=NAS filesystem mount(vol1)
+After=NetworkManager-wait-online.service
+
+[Mount]
+What=//192.168.1.2/vol1
+Where=/home/awalder/mnt/vol1
+Type=cifs
+Options=user=turska,password=ruttuinenRessukka7778,uid=1000,gid=985,rw
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,29 @@
+{
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cpp",
+                "cuda",
+                "h",
+                "hpp"
+            ],
+            "rootPatterns": [
+                "compile_commands.json",
+                ".ccls"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/home/awalder/.cache/ccls"
+                },
+                "highlight": {
+                    "lsRanges" : true
+                },
+                "client": {
+                    "snippetSupport": true
+                }
+            }
+        }
+    }
+}

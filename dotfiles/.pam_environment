@@ -1,0 +1,6 @@
+MOZ_ENABLE_WAYLAND=1
+TERMINAL=/sbin/alacritty
+EDITOR=/sbin/nvim
+FILE=/sbin/lf
+READER=/sbin/zathura
+BROWSER=/sbin/firefox

@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+currentDir=$(pwd)
+kceDir="$(pwd | grep -oe "/home/awalder/dev/kce-ws[0-9]\/\(kcegc\|kcecommon\)")"
+buildDir="$(pwd | grep -oe "/home/awalder/dev/kce-ws[0-9]\/\(kcegc\|kcecommon\)" | awk -F/ '{ print $6 }')"
+
+cd $kceDir
+
+case "$buildDir" in
+    kcegc) DISTCC_NUM_THREADS=$(distcc -j) ./build --clang ${*:1} ;;
+    kcecommon) DISTCC_NUM_THREADS=$(distcc -j) ./build --m64 --clang ${*:1} ;;
+esac
+
+cd $currentDir
