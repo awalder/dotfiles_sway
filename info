@@ -1,0 +1,31 @@
+Auto power-on after boot
+By default, the Bluetooth adapter does not power on after a reboot, you need to add the line AutoEnable=true in the configuration file /etc/bluetooth/main.conf at the bottom in the [Policy] section:
+
+/etc/bluetooth/main.conf
+[Policy]
+AutoEnable=true
+
+##
+
+Linux kernel 5.9.1 broke bluetoot reconnect on my mx master 3
+
+I am using Intel AX200 and Logitech MX Master 2S and since upgrading to 5.9.1 I had to reconnect my mouse after every reboot.
+After removing
+
+[IdentityResolvingKey]
+Key=CDF...
+from
+
+/var/lib/bluetooth/<MAC>/<MAC>/info
+and a reboot manual reconnection is not needed anymore. I rebooted twice, the issue looks like its fixed.
+
+--
+
+This was removed
+[IdentityResolvingKey]
+Key=201CDCB9117BD8649AC230B71F62F256
+
+###
+
+
+

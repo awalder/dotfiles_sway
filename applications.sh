@@ -19,6 +19,7 @@ install alsa-firmware
 install alsa-utils
 install autoconf
 install autogen
+install playerctl
 install base-devel
 install bashtop
 install bat

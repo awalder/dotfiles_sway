@@ -4,7 +4,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Semantic highlighting
 Plug 'jackguo380/vim-lsp-cxx-highlight'
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+" Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 
 " Colorthemes
 Plug 'tomasiser/vim-code-dark'
@@ -101,7 +101,7 @@ hi ColorColumn guibg=#4f3f3f ctermbg=246
 
 " set clipboard+=unnamedplus
 " Copy to clipboard in visualmode
-vnoremap <C-C> :w !xclip -i -sel c<CR><CR>
+vnoremap <C-C> :w !wl-copy <CR><CR>
 
 nnoremap <leader>l :set list!<CR>
 set listchars=tab:▸\ ,eol:¬,space:·,nbsp:␣,trail:~
@@ -109,6 +109,9 @@ set listchars=tab:▸\ ,eol:¬,space:·,nbsp:␣,trail:~
 " AutoCmds
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
+
+autocmd FileType meson setlocal textwidth=0 wrapmargin=0
+autocmd FileType vim setlocal textwidth=0 wrapmargin=0
 
 let g:lsp_cxx_hl_use_text_props = 1
 let g:tmux_navigator_no_mappings = 1
@@ -157,15 +160,15 @@ let g:coc_global_extensions = [
 nmap <silent> <M-j> <Plug>(coc-definition)
 nmap <silent> <C-,> <Plug>(coc-references)
 nn <silent> K :call CocActionAsync('doHover')<cr>
-nmap <silent> Ö <Plug>(coc-diagnostic-prev)
-nmap <silent> Ä <Plug>(coc-diagnostic-next)
+nmap <silent> + <Plug>(coc-diagnostic-prev)
+nmap <silent> = <Plug>(coc-diagnostic-next)
 
 source ~/.config/nvim/cocconfig.vim
 
 """""""""""""""""""""""""""""
 "" ericcurtin/CurtineIncSw.vim
 nnoremap <silent> gp :call CurtineIncSw()<CR>
-nnoremap <silent> gå :vs % <bar> :call CurtineIncSw()<CR>
+nnoremap <silent> g- :vs % <bar> :call CurtineIncSw()<CR>
 
 " CTRL + S - Save
 noremap <silent> <C-s> :update<CR>
@@ -198,6 +201,9 @@ nnoremap <silent> [fzf-p]l     :CocCommand fzf-preview.LocationList<CR>
 " nnoremap <C-e> :FzfPreviewDirectoryFiles<CR>
 nnoremap <silent> <C-e> :CocCommand fzf-preview.DirectoryFiles<CR>
 nnoremap <silent> <C-f> :CocCommand fzf-preview.Buffers<CR>
+
+" let g:fzf_preview_filelist_command = 'rg --files --follow --no-messages -g \!"* *"' " Installed ripgrep
+let g:fzf_preview_directory_files_command = 'rg --files --follow --no-messages -g \!"* *"'
 
 " nnoremap <C-f> :FzfPreviewLines<CR>
 " nnoremap <silent> <C-f> :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'"<CR>
