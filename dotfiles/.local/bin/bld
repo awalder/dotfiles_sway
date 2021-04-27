@@ -6,8 +6,8 @@ buildDir="$(pwd | grep -oe "/home/awalder/dev/kce-ws[0-9]\/\(kcegc\|kcecommon\)"
 cd $kceDir
 
 case "$buildDir" in
-    kcegc) DISTCC_NUM_THREADS=$(distcc -j) ./build --clang ${*:1} ;;
-    kcecommon) DISTCC_NUM_THREADS=$(distcc -j) ./build --m64 --clang ${*:1} ;;
+    kcegc) DISTCC_NUM_THREADS=$(distcc -j) ./build -L -j64 ${*:1} ;;
+    kcecommon) DISTCC_NUM_THREADS=$(distcc -j) ./build -L -j64 --m64 ${*:1} ;;
 esac
 
 cd $currentDir

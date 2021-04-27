@@ -59,6 +59,5 @@ map cfv :e ̃~/.config/nvim/init.vim<CR>
 map cfa :e ~/.config/aliasrc<CR>
 map cfk :e ~/.config/sxhkd/sxhkdrc<CR>
 map cfg :e ~/.gitconfig<CR>
-map cfm :e ~/.xmonad/xmonad.hs<CR>
-map cfmb :e ~/.config/xmobar/xmobarrc<CR>
 map cft :e ~/.tmux.conf<CR>
+map cfs :e ~/.config/sway/config<CR>

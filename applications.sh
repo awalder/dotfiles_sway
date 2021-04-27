@@ -15,8 +15,6 @@ function install {
 
 
 install alacritty
-install alsa-firmware
-install alsa-utils
 install autoconf
 install autogen
 install playerctl
@@ -91,8 +89,6 @@ install wf-recorder
 install wget
 install xorg-server-xwayland
 install youtube-dl
-install vulkan-headers
-install vulkan-validation-layers
 install zathura
 install zathura-pdf-mupdf
 install zsh

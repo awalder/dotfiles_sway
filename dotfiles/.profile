@@ -9,6 +9,7 @@ export ZDOTDIR="$HOME/.config"
 export DOTDIR="$HOME/.config"
 export LC_ALL=en_US.UTF-8
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .os'
+export MANPAGER='nvim +Man!'
 
 [ ! -f "$HOME/.config/shortcutrc" ] && shortcuts > /dev/null 2>&1
 

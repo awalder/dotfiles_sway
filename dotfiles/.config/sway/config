@@ -6,9 +6,11 @@
     set $term alacritty
     set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.nodes[]?, .floating_nodes[]?) | .focused] | any) | index(true)') - 1) -show drun -run-command 'swaymsg exec -- {cmd}'
     set $menu rofi -m $(swaymsg -t get_outputs | jq 'map(select(.active) | .focused) | index(true)') -show drun -run-command 'swaymsg exec -- {cmd}'
-    set $screenshot grim ~/Images/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
-    set $screenclip slurp | grim -g - ~/Images/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
-    set $background ~/.config/wall.png
+    set $screenshot grim ~/images/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
+    set $screenclip slurp | grim -g - ~/images/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
+    set $screencopy grim -g "$(slurp)" - | wl-copy -t image/png
+    set $background ~/wallpapers/0189.jpg
+    # set $background $(ls ~/wallpapers | sort -R | tail -n 1 | while read file ; do echo $file ; done)
 
     set $cl_high #009ddc
     set $cl_indi #d9d8d8
@@ -23,28 +25,31 @@
     client.urgent           $cl_urge $cl_urge $cl_fore $cl_urge $cl_urge
 
 # workspaces
-    set $ws1   1:
-    set $ws2   2:
+    set $ws1   1:1
+    set $ws2   2:2
     set $ws3   3:3
-    set $ws4   4:4
+    set $ws4   4:
     set $ws5   5:5
     set $ws6   6:6
     set $ws7   7:7
-    set $ws8   8:8
-    set $ws9   9:9
+    set $ws8   8:
+    set $ws9   9:
     set $ws0   10:10
-    set $wsF1  11:
-    set $wsF2  12:
+    set $wsF1  11:
+    set $wsF2  12:12
     set $wsF3  13:13
     set $wsF4  14:14
     set $wsF5  15:15
     set $wsF6  16:16
     set $wsF7  17:17
-    set $wsF8  18:
+    set $wsF8  18:18
     set $wsF9  19:19
     set $wsF10 20:20
     set $wsF11 21:
-    set $wsF12 22:
+    set $wsF12 22:22
+
+# Floating mod
+    floating_modifier $mod normal
 
 # Font
     font pango:Sans 12
@@ -72,14 +77,32 @@
         # xkb_variant nodeadkeys
         # xkb_options caps:swapescape
     # }
-    input * repeat_delay 300
-    input * repeat_rate 50
+input * {
+    repeat_delay 300
+    repeat_rate 50
 
+    xkb_layout "us,fi"
+    # xkb_options "grp:alt_space_toggle"
+    xkb_options "grp:rwin_toggle"
+    # xkb_options grp:alts_toggle
+    # xkb_options grp:win_space_toggle
+}
 
+input 1133:45091:Logitech_Wireless_Mouse_MX_Master_3 {
+    accel_profile adaptive
+    pointer_accel 0.5
+ }
+
+input 1133:49740:Logitech_G400s_Optical_Gaming_Mouse {
+    accel_profile flat
+    pointer_accel -0.1
+ }
 
 # Output configuration
-# output DP-3 mode 3840x1600@160Hz pos 0 0 adaptive_sync on
-# output HDMI-A-1 mode 1920x1080@60Hz pos 3840 0
+# output DP-6 mode 3840x1600@160Hz pos 0 0 adaptive_sync on
+# output HDMI-A-2 mode 1920x1080@60Hz pos 3840 0
+output DP-1 mode 3840x1600@160Hz pos 0 0 adaptive_sync off
+output HDMI-A-1 mode 1920x1080@60Hz pos 3840 0
 output * bg $background fill
 
 # Default workspaces for common programs
@@ -90,10 +113,10 @@ output * bg $background fill
 # assign [class="^Mailspring$"] $wsF2
 # assign [app_id="virt-manager"] $wsF8
 # assign [class="^KeePass2$"] $wsF11
-# assign [class="^Spotify$"] $wsF12
+assign [class="^Spotify$"] $wsF1
 
 # Opacity for applications
-    set $opacity 0.9
+    set $opacity 0.90
     # for_window [class="Alacritty"] opacity $opacity
     for_window [app_id="Alacritty"] opacity $opacity
 
@@ -103,6 +126,7 @@ output * bg $background fill
 bindsym $mod+Return exec $term
 bindsym $mod+Print exec $screenshot
 bindsym $mod+Shift+Print exec $screenclip
+bindsym $mod+Control+Print exec $screencopy
 bindsym $mod+p exec $menu
 
 bindsym $mod+Shift+q kill
@@ -112,34 +136,43 @@ bindsym $mod+b splith
 bindsym $mod+v splitv
 
 bindsym $mod+home exec $lock
-bindsym $mod+Escape exec $power
-bindsym $mod+End exec $wifi
+# bindsym $mod+Escape exec $power
+# bindsym $mod+End exec $wifi
 
 # Notifications
 bindsym Control+Space exec makoctl dismiss
 bindsym Control+Shift+Space exec makoctl dismiss --all
 
 # Multimedia
-# bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
-# bindsym --locked XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
-# bindsym --locked XF86AudioMute exec --no-startup-id pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggle
-# bindsym --locked XF86AudioPlay exec playerctl play-pause
-# bindsym --locked XF86AudioNext exec playerctl next
-# bindsym --locked XF86AudioPrev exec playerctl previous
+bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
+bindsym --locked XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
+bindsym --locked XF86AudioMute exec --no-startup-id pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggle
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPrev exec playerctl previous
 
 # Brightness controls
 # bindsym --locked XF86MonBrightnessUp exec --no-startup-id light -A 10
 # bindsym --locked XF86MonBrightnessDown exec --no-startup-id light -U 10
 
+# Software startup keybinds
+bindsym $mod+Alt+b exec --no-startup-id firefox
+bindsym $mod+Alt+p exec --no-startup-id pavucontrol-qt
+bindsym $mod+Alt+e exec --no-startup-id pcmanfm
+bindsym $mod+Alt+s exec --no-startup-id spotify
+
 # Toggle Redshift
-# bindsym $mod+Home exec --no-startup-id pkill -USR1 redshift
+bindsym $mod+End exec --no-startup-id pkill -USR1 redshift
 
 # Idle configuration
 exec swayidle \
-    timeout 600 'exec $lock' \
-    timeout 900 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"' \
-    before-sleep 'exec $lock'
+    timeout 1800 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"'
+# exec swayidle \
+    # timeout 3600 'exec $lock' \
+    # timeout 1800 'swaymsg "output * dpms off"' \
+    # resume 'swaymsg "output * dpms on"' \
+    # before-sleep 'exec $lock'
 # exec swayidle -w \
          # timeout 600 'swaylock -f -c 000000' \
          # timeout 900 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
@@ -205,15 +238,20 @@ bindsym $mod+Shift+F10  move container to workspace $wsF10
 bindsym $mod+Shift+F11  move container to workspace $wsF11
 bindsym $mod+Shift+F12  move container to workspace $wsF12
 
+bindsym $mod+Control+Shift+h    move workspace to output left
+bindsym $mod+Control+Shift+l    move workspace to output right
+# bindsym $mod+Control+Shift+3    move container to workspace $ws3
+# bindsym $mod+Control+Shift+4    move container to workspace $ws4
+
 # Layout stuff:
 
 # Switch the current container between different layout styles
-bindsym $mod+s layout stacking
+# bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # Make the current focus fullscreen
-bindsym $mod+f fullscreen
+bindsym $mod+Shift+f fullscreen
 
 # Toggle the current focus between tiling and floating mode
 bindsym $mod+Shift+space floating toggle
@@ -234,10 +272,10 @@ bindsym $mod+n focus next
 
 # Modes
 mode "resize" {
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+    bindsym h resize shrink width 20px
+    bindsym j resize grow height 20px
+    bindsym k resize shrink height 20px
+    bindsym l resize grow width 20px
 
     # return to default mode
     bindsym Return mode "default"

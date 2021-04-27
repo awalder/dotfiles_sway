@@ -102,15 +102,28 @@ hi ColorColumn guibg=#4f3f3f ctermbg=246
 " set clipboard+=unnamedplus
 " Copy to clipboard in visualmode
 vnoremap <C-C> :w !wl-copy <CR><CR>
+" vnoremap <leader>y "*y
+vnoremap <C-y> "*y
+nnoremap <C-p> "*p
+" nnoremap <leader>p "*p
 
 nnoremap <leader>l :set list!<CR>
 set listchars=tab:▸\ ,eol:¬,space:·,nbsp:␣,trail:~
 
 " AutoCmds
 " Remove trailing whitespace on save
-autocmd BufWritePre * %s/\s\+$//e
+function! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+" autocmd BufWritePre * %s/\s\+$//e
 
 autocmd FileType meson setlocal textwidth=0 wrapmargin=0
+autocmd FileType robot setlocal textwidth=0 wrapmargin=0
 autocmd FileType vim setlocal textwidth=0 wrapmargin=0
 
 let g:lsp_cxx_hl_use_text_props = 1

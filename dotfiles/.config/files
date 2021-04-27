@@ -6,6 +6,5 @@ cfv     ̃~/.config/nvim/init.vim
 cfa     ~/.config/aliasrc
 cfk     ~/.config/sxhkd/sxhkdrc
 cfg     ~/.gitconfig
-cfm     ~/.xmonad/xmonad.hs
-cfmb    ~/.config/xmobar/xmobarrc
 cft     ~/.tmux.conf
+cfs     ~/.config/sway/config

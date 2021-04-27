@@ -21,18 +21,6 @@
         "format": "{:%a %d %b %H:%M}",
         "tooltip": false
     },
-    "battery": {
-        "format": "{capacity}% {icon}",
-        "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", ""],
-        "format-charging": "{capacity}% ",
-        "interval": 30,
-        "states": {
-            "warning": 25,
-            "critical": 10
-        },
-        "tooltip": false
-    },
     "network": {
         "format": "{icon}",
         "format-alt": "{ipaddr}/{cidr} {icon}",
@@ -73,14 +61,6 @@
         "interval": 60,
         "exec": "~/.config/waybar/modules/storage.sh"
     },
-    "backlight": {
-        "format": "{icon}",
-        "format-alt": "{percent}% {icon}",
-        "format-alt-click": "click-right",
-        "format-icons": ["", ""],
-        "on-scroll-down": "light -A 1",
-        "on-scroll-up": "light -U 1"
-    },
     "custom/weather": {
         "format": "{}",
         "format-alt": "{alt}: {}",
@@ -114,6 +94,6 @@
         "interval": 5
     },
     "tray": {
-        "icon-size": 18
+        "icon-size": 24
     }
 }

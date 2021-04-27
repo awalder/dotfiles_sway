@@ -1,6 +1,6 @@
 [user]
 	name = Anssi Walder
-	email = anssi.walder@kone.com
+	email = anssiwa@gmail.com
 
 [alias]
     lg = log --graph --date=relative --pretty=format:\"%C(auto,yellow)%h %C(auto,blue)%ad %C(auto,green)%aN %C(auto,reset)%s%C(auto)%d\"
@@ -21,3 +21,5 @@
     verbose = true
 [log]
     decorate = full
+[init]
+	defaultBranch = main

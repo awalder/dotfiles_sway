@@ -25,7 +25,27 @@ This was removed
 [IdentityResolvingKey]
 Key=201CDCB9117BD8649AC230B71F62F256
 
-###
+#########################################
+#########################################
+
+### CRACKLING SOUND ON STEAM GAMES
+/etc/pulse/daemon.conf
+
+default-fragments = 2
+default-fragment-size-msec = 4
 
 
+/etc/pulse/default.pa
 
+### Automatically load driver modules depending on the hardware available
+.ifexists module-udev-detect.so
+load-module module-udev-detect tsched=0 <<<<<<<<<<<<<<<<<<<<<<< add this
+
+.else
+
+### Use the static hardware detection module (for systems that lack udev support)
+load-module module-detect
+.endif
+
+
+### CRACKLING SOUND ON STEAM GAMES
